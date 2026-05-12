@@ -1,0 +1,2 @@
+data/problem_1/Wikipedia-En-41784-Articles/**/* filter=lfs diff=lfs merge=lfs -text
+data/problem_3/gearbox/**/* filter=lfs diff=lfs merge=lfs -text
