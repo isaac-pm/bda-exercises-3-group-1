@@ -1,0 +1,11 @@
+============================================================
+LSA GRID SEARCH STARTED
+============================================================
+SPARK_HOME: /opt/apps/easybuild/systems/iris/rhel810-20250803/2023b/broadwell/software/Spark/3.5.4-foss-2023b-Java-17
+PYSPARK_PYTHON: /scratch/users/eleiva/assignment3/nlp_env/bin/python
+CORES: 16
+============================================================
+
+========================================================
+RUN: regex_freq5000_k25
+========================================================

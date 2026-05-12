@@ -1,0 +1,79 @@
+============================================================
+LSA GRID SEARCH STARTED
+============================================================
+WORK_DIR: /home/users/eleiva/uni/2_semester/big_data_analytics/assignment3
+BASE_DIR: /scratch/users/eleiva/assignment3
+SPARK_HOME: /opt/apps/easybuild/systems/iris/rhel810-20250803/2023b/broadwell/software/Spark/3.5.4-foss-2023b-Java-17
+PYSPARK_PYTHON: /scratch/users/eleiva/assignment3/nlp_env/bin/python
+DATA_DIR: /scratch/users/eleiva/assignment3/data/Wikipedia-En-41784-Articles
+STOPWORDS_PATH: /scratch/users/eleiva/assignment3/stopwords.txt
+NLTK_DIR: /scratch/users/eleiva/assignment3/nltk_data
+CORES: 16
+============================================================
+
+========================================================
+RUN: regex_freq5000_k25
+========================================================
+
+Completed: regex_freq5000_k25
+Runtime: 361 seconds
+
+========================================================
+RUN: regex_freq5000_k100
+========================================================
+
+Completed: regex_freq5000_k100
+Runtime: 764 seconds
+
+========================================================
+RUN: regex_freq5000_k250
+========================================================
+
+Completed: regex_freq5000_k250
+Runtime: 1441 seconds
+
+========================================================
+RUN: regex_freq10000_k25
+========================================================
+
+Completed: regex_freq10000_k25
+Runtime: 467 seconds
+
+========================================================
+RUN: regex_freq10000_k100
+========================================================
+
+Completed: regex_freq10000_k100
+Runtime: 897 seconds
+
+========================================================
+RUN: regex_freq10000_k250
+========================================================
+
+Completed: regex_freq10000_k250
+Runtime: 1712 seconds
+
+========================================================
+RUN: regex_freq20000_k25
+========================================================
+
+Completed: regex_freq20000_k25
+Runtime: 702 seconds
+
+========================================================
+RUN: regex_freq20000_k100
+========================================================
+
+Completed: regex_freq20000_k100
+Runtime: 905 seconds
+
+========================================================
+RUN: regex_freq20000_k250
+========================================================
+
+Completed: regex_freq20000_k250
+Runtime: 1994 seconds
+
+========================================================
+RUN: nlp_freq5000_k25
+========================================================
