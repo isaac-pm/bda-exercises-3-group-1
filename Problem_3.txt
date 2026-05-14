@@ -1,0 +1,70 @@
+# Problem 3 – Outlier Detection for Gearbox Readings
+
+## Overview
+The gearbox dataset (CSV files under data/problem_3/gearbox) contains multiple numeric sensor channels per row depending on the file. I used Spark ML KMeans to cluster the full dataset for k=2..12, computed each point's distance to its assigned centroid, and reported the top-25 outliers per k. Features are standardized prior to clustering. A PCA-based 2D scatter plot script is included for visualization.
+
+## How to run
+
+```bash
+# Initialize a Python virtual environment and install dependencies
+cd solutions/problem_3
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Run the outlier detection script for k=2..12
+python gearbox_outliers.py
+
+# Run the PCA visualization scripts
+python gearbox_visualization.py
+python gearbox_elbow_plot.py
+```
+
+## Notes
+- The scripts write results to solutions/problem_3/outputs/.
+- The outlier script produces one CSV per k, a runtimes.csv, a cluster_scores.csv (average distance to centroid per k), and a summary.txt with a human-readable table.
+- Runtime measurement includes the initial persist trigger so k-to-k runtimes are comparable.
+- Runtimes measure KMeans fit + scoring; feature scaling (StandardScaler fit) happens once before the k loop and is not included in the per-k timings.
+
+## Results
+### Runtimes (seconds)
+| k | runtime_seconds |
+| --- | --- |
+| 2 | 65.512896247 |
+| 3 | 112.277081443 |
+| 4 | 105.512096289 |
+| 5 | 110.162593085 |
+| 6 | 108.800653269 |
+| 7 | 113.467825457 |
+| 8 | 111.176117290 |
+| 9 | 109.457517823 |
+| 10 | 109.316039336 |
+| 11 | 107.897147132 |
+| 12 | 108.681914624 |
+
+### Average distance to centroid
+| k | avg_distance |
+| --- | --- |
+| 2 | 1.024520 |
+| 3 | 0.981656 |
+| 4 | 0.938152 |
+| 5 | 0.893006 |
+| 6 | 0.858193 |
+| 7 | 0.798106 |
+| 8 | 0.756767 |
+| 9 | 0.726214 |
+| 10 | 0.697245 |
+| 11 | 0.675176 |
+| 12 | 0.651296 |
+
+### Top-25 outliers for each k
+See the per-k CSVs in `solutions/problem_3/outputs/outliers_k2.csv` through `solutions/problem_3/outputs/outliers_k12.csv`.
+
+## Observations
+- Increasing k steadily tightens clusters (avg distance drops from 1.0245 at k=2 to 0.6513 at k=12), but the top-25 outlier identities remain largely stable across k (mostly from Run_6, Run_68, Run_36, and Run_104); distances for the same extreme points shrink slightly as k grows.
+- The avg_distance curve shows the biggest improvement around k=6 to k=7, with smaller gains afterward, suggesting a mild elbow around k=7 to k=8 rather than a sharp break.
+- Runtimes are lowest for k=2 (~65.5s) and then stabilize around ~105 to 113s for k=3..12, consistent with fit+scoring being the dominant cost once the pipeline is warm.
+- The PCA plot uses Spark-scored predictions and distances from `solutions/problem_3/outputs/scored_sample.csv`, and the outlier script’s top-100 cutoff yields 0% anomaly fraction for all k because the threshold is defined as the 100th largest distance.
+
+## Template reference
+- solutions/problem_3/RunKMeans.py is the course template (KDD Cup dataset) retained for reference only; it is not the gearbox solution.
